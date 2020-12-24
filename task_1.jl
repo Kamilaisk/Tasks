@@ -1,10 +1,12 @@
-function mark_kross!(r::Robot) # - главная функция  
-    for side in (HorizonSide(i) for i=0:3) # - перебор всех возможных направленийpwd()
+function mark_kross!(r::Robot) #главная функция  
+    for side in (HorizonSide(i) for i=0:3)
         putmarkers!(r,side)
         move_by_markers(r,inverse(side))
     end
     putmarker!(r)
 end
+
+#вспомогателные функции
 
 #Всюду в заданном направлении ставит маркеры вплоть до перегородки, но в исходной клетке маркер не ставит
 putmarkers!(r::Robot,side::HorizonSide) = 
