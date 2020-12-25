@@ -1,21 +1,28 @@
 function mark_angles(r) #главная функция  
     num_steps=[]
-    while ((isborder(r,Sud)==false) || (isborder(r,West)==false)) # Робот - не в Юго-Западном углу
-        push!(num_steps, moves!(r, West)) # - добавляется в конец массива новый элемент
+    while ((isborder(r,Sud)==false) || (isborder(r,West)==false)) #не в Юго-Западном углу
+        push!(num_steps, moves!(r, West))
         push!(num_steps, moves!(r, Sud))
     end
     #Робот в Юго-Западном углу и в num_steps - закодирован пройденный путь
     
     for side in (Nord,Ost,Sud,West)
-        moves!(r,side) # возвращаемый результат игнорируется
+        moves!(r,side)
         putmarker!(r)
     end
     #Маркеры поставлены и Робот - в юго-западном углу
     
-    for (i,n) in enumerate(reverse!(num_steps)) # встроенная функция reverse! переворачивает массив задом на перед
-        side = isodd(i) ? Ost : Nord # odd - нечетный
-        moves!(r,side,n)
-    end
+    k = num_steps
+    i = (mod(k, 2) == 1) ? 2 : 1
+    for n in (1:k)
+        i=i+1
+        t=isodd(i)
+        side=Nord
+        if (t == true)
+            side = Ost
+        end
+        moves!(r,side,num_steps[k-n+1])
+    end 
     #Робот - в исходном положении
 end
 
