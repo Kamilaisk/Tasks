@@ -28,7 +28,7 @@ end
 
 #Перемещает робота в заданном направлении по заданному количетсву шагов
 function moves!(r::Robot,side::HorizonSide,num_steps::Int)
-    for _ in 1:numsteps #символ "_" заменяет неиспользуемую переменную
+    for _ in 1:num_steps #символ "_" заменяет неиспользуемую переменную
         move!(r,side)
     end
 end
